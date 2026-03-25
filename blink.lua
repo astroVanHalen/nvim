@@ -1,0 +1,23 @@
+require("blink.cmp").setup({
+  keymap = {
+    preset     = "none",
+    ["<C-Space>"] = { "show", "hide" },
+    ["<CR>"]      = { "accept", "fallback" },
+    ["<C-j>"]     = { "select_next", "fallback" },
+    ["<C-k>"]     = { "select_prev", "fallback" },
+    ["<Tab>"]     = { "snippet_forward", "fallback" },
+    ["<S-Tab>"]   = { "snippet_backward", "fallback" },
+  },
+  appearance = { nerd_font_variant = "mono" },
+  completion = { menu = { auto_show = true } },
+  sources    = { default = { "lsp", "path", "buffer", "snippets" } },
+  snippets = {
+    expand = function(args)
+      require("luasnip").lsp_expand(args)
+    end,
+  },
+  fuzzy = {
+    implementation     = "prefer_rust",
+    prebuilt_binaries  = { download = true },
+  },
+})
